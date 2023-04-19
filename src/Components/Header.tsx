@@ -1,11 +1,11 @@
-import logo from "../assets/logo.svg";
+import logoImg from "../assets/logo.svg";
 
-import styled from "./header.module.css";
+import styled from "./Header.module.css";
 
 export function Header() {
   return (
     <header className={styled.header}>
-      <img src={logo} alt="Logotipo" />
+      <img src={logoImg} alt="Logotipo" />
     </header>
   );
 }
