@@ -1,10 +1,11 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Header } from "./Components/Header";
 import { NewTask } from "./Components/NewTask";
 import { Task } from "./Components/Task";
 import { TaskList } from "./Components/TaskList";
+import { TaskProgress } from "./Components/TaskProgress";
 
 interface Task {
   id: string;
@@ -15,6 +16,8 @@ interface Task {
 function App() {
   const [newTaskInputValue, setNewTaskInputValue] = useState("");
   const [taskList, setTaskList] = useState<Task[]>([]);
+
+  const [taskDone, setTaskDone] = useState<number>(0);
 
   function handleNewTaskSubmit(event: FormEvent) {
     event.preventDefault();
@@ -44,6 +47,9 @@ function App() {
     newTaskList[taskIndex].status =
       newTaskList[taskIndex].status === "todo" ? "done" : "todo";
 
+    const taskDone = taskList.filter((task) => task.status === "done");
+
+    setTaskDone(taskDone.length);
     setTaskList(newTaskList);
   }
 
@@ -56,6 +62,7 @@ function App() {
         onChangeInput={handleNewTaskInputChange}
       />
       <TaskList>
+        <TaskProgress taskTotal={taskList.length} taskDone={taskDone} />
         {taskList.map((task) => (
           <Task
             key={task.id}

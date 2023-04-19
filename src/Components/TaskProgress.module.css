@@ -1,0 +1,32 @@
+.taskProgressContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 736px;
+
+  margin: 0 1rem 1rem 1.5rem;
+
+  font-weight: bold;
+}
+
+.taskProgressContainer div span:nth-child(1) {
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
+}
+
+.taskProgressContainer div span:nth-child(2) {
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 8px;
+  background-color: var(--gray-400);
+}
+
+.taskProgressContainer div:nth-child(1) span:nth-child(1) {
+  color: var(--blue);
+}
+
+.taskProgressContainer div:nth-child(2) span:nth-child(1) {
+  color: var(--purple);
+}
