@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Header } from "./Components/Header";
 import { NewTask } from "./Components/NewTask";
+import { Task } from "./Components/Task";
+import { TaskList } from "./Components/TaskList";
 
 interface Task {
   id: string;
@@ -30,6 +32,21 @@ function App() {
     setNewTaskInputValue(event.target.value);
   }
 
+  function handleOnDeleteTask(id: string) {
+    setTaskList(taskList.filter((task) => task.id !== id));
+  }
+
+  function handleOnCheckTask(id: string) {
+    const newTaskList = taskList;
+
+    const taskIndex = newTaskList.findIndex((task) => task.id === id);
+
+    newTaskList[taskIndex].status =
+      newTaskList[taskIndex].status === "todo" ? "done" : "todo";
+
+    setTaskList(newTaskList);
+  }
+
   return (
     <div className="App">
       <Header />
@@ -38,13 +55,17 @@ function App() {
         inputValue={newTaskInputValue}
         onChangeInput={handleNewTaskInputChange}
       />
-      <h1>
-        {taskList.map((item) => (
-          <p key={item.id}>
-            {item.content} - {item.status}
-          </p>
+      <TaskList>
+        {taskList.map((task) => (
+          <Task
+            key={task.id}
+            id={task.id}
+            container={task.content}
+            onDeleteTask={handleOnDeleteTask}
+            onChange={handleOnCheckTask}
+          />
         ))}
-      </h1>
+      </TaskList>
     </div>
   );
 }

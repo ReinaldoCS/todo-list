@@ -23,13 +23,13 @@
   width: 100%;
   max-width: 638px;
 
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   background-color: var(--gray-500);
 }
 
 .newTaskContainer > input:focus {
   outline: none !important;
-  border: 1px solid var(--purple-dark);
+  border: 2px solid var(--purple-dark);
 }
 
 .newTaskContainer > button[type="submit"] {
