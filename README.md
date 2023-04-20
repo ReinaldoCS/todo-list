@@ -13,7 +13,7 @@
 
 :small_blue_diamond: [🎯 Funcionalidades](#-funcionalidades)
 
-:small_blue_diamond: [💻 Layout e Deploy da Aplicação](#-layout-e-deploy-da-aplicação-dash)
+:small_blue_diamond: [💻 Layout e Deploy da Aplicação](#-layout-e-deploy-da-aplicação)
 
 :small_blue_diamond: [⚠️ Pré-requisitos](#️-pré-requisitos)
 
@@ -82,6 +82,7 @@ npm dev
 - [React](https://pt-br.reactjs.org)
 - [Vite JS](https://vitejs.dev)
 - [Typescript](https://www.typescriptlang.org)
+- [UUID](https://github.com/uuidjs/uuid)
 
 ## :octocat: Desenvolvedores/Contribuintes
 
