@@ -41,7 +41,7 @@
 
 ## 💻 Layout e Deploy da Aplicação
 
-> Vercel: https://rango-online.vercel.app
+> Vercel: https://todo-list-three-ebon.vercel.app
 >
 > Figma: https://www.figma.com/file/RmfiWCiYXfFNyoY2XidUqA/ToDo-List?t=C7RaCbZg9x2ktNtH-0
 
