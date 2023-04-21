@@ -6,13 +6,12 @@ import styled from "./Task.module.css";
 interface TaskProps {
   id: string;
   container: string;
+  isComplete: boolean;
   onDeleteTask: (id: string) => void;
   onChange: (id: string) => void;
 }
 
-export function Task({ container, onDeleteTask, onChange, id }: TaskProps) {
-  const [isChecked, setIsChecked] = useState(false);
-
+export function Task({ container, isComplete, onDeleteTask, onChange, id }: TaskProps) {
   function handleDeleteTask() {
     onDeleteTask(id);
   }
@@ -25,11 +24,10 @@ export function Task({ container, onDeleteTask, onChange, id }: TaskProps) {
     <div className={styled.taskContainer}>
       <input
         type="checkbox"
-        checked={isChecked}
-        onClick={() => setIsChecked(!isChecked)}
+        checked={isComplete}
         onChange={handleOnChange}
       />
-      <span className={isChecked ? styled.textDone : ""}>{container}</span>
+      <span className={isComplete ? styled.textDone : ""}>{container}</span>
       <button type="button" onClick={handleDeleteTask}>
         <img src={trashImg} alt="lixeira" />
       </button>

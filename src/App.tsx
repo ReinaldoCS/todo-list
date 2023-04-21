@@ -10,26 +10,40 @@ import { EmptyList } from "./EmptyList";
 
 interface Task {
   id: string;
-  status: "done" | "todo";
+  isComplete: boolean;
   content: string;
 }
 
 function App() {
   const [newTaskInputValue, setNewTaskInputValue] = useState("");
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const [taskList, setTaskList] = useState<Task[]>(() => {
+    const storageListTask = localStorage.getItem("@todo-list:tasks");
+
+    if (storageListTask) {
+      return JSON.parse(storageListTask);
+    }
+
+    return [];
+  });
 
   const [taskDone, setTaskDone] = useState<number>(0);
 
   function handleNewTaskSubmit(event: FormEvent) {
     event.preventDefault();
-    setTaskList([
+
+    const listUpdated: Task[] = [
       ...taskList,
       {
         id: uuidv4(),
-        status: "todo",
+        isComplete: false,
         content: newTaskInputValue,
       },
-    ]);
+    ];
+
+    localStorage.setItem("@todo-list:tasks", JSON.stringify(listUpdated));
+    setTaskList(listUpdated);
+
+    setNewTaskInputValue("");
   }
 
   function handleNewTaskInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -37,21 +51,26 @@ function App() {
   }
 
   function handleOnDeleteTask(id: string) {
-    setTaskList(taskList.filter((task) => task.id !== id));
+    const listUpdated = taskList.filter((task) => task.id !== id);
+
+    localStorage.setItem("@todo-list:tasks", JSON.stringify(listUpdated));
+    setTaskList(listUpdated);
   }
 
   function handleOnCheckTask(id: string) {
-    const newTaskList = taskList;
+    const listUpdated = taskList;
 
-    const taskIndex = newTaskList.findIndex((task) => task.id === id);
+    const taskIndex = listUpdated.findIndex((task) => task.id === id);
 
-    newTaskList[taskIndex].status =
-      newTaskList[taskIndex].status === "todo" ? "done" : "todo";
+    listUpdated[taskIndex].isComplete =
+      listUpdated[taskIndex].isComplete === true ? false : true;
 
-    const taskDone = taskList.filter((task) => task.status === "done");
+    const taskDone = taskList.filter((task) => task.isComplete === true);
 
     setTaskDone(taskDone.length);
-    setTaskList(newTaskList);
+
+    localStorage.setItem("@todo-list:tasks", JSON.stringify(listUpdated));
+    setTaskList(listUpdated);
   }
 
   return (
@@ -70,6 +89,7 @@ function App() {
             <Task
               key={task.id}
               id={task.id}
+              isComplete={task.isComplete}
               container={task.content}
               onDeleteTask={handleOnDeleteTask}
               onChange={handleOnCheckTask}
