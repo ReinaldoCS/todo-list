@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Header } from "./Components/Header";
@@ -6,6 +6,7 @@ import { NewTask } from "./Components/NewTask";
 import { Task } from "./Components/Task";
 import { TaskList } from "./Components/TaskList";
 import { TaskProgress } from "./Components/TaskProgress";
+import { EmptyList } from "./EmptyList";
 
 interface Task {
   id: string;
@@ -63,15 +64,20 @@ function App() {
       />
       <TaskList>
         <TaskProgress taskTotal={taskList.length} taskDone={taskDone} />
-        {taskList.map((task) => (
-          <Task
-            key={task.id}
-            id={task.id}
-            container={task.content}
-            onDeleteTask={handleOnDeleteTask}
-            onChange={handleOnCheckTask}
-          />
-        ))}
+
+        {taskList.length >= 1 ? (
+          taskList.map((task) => (
+            <Task
+              key={task.id}
+              id={task.id}
+              container={task.content}
+              onDeleteTask={handleOnDeleteTask}
+              onChange={handleOnCheckTask}
+            />
+          ))
+        ) : (
+          <EmptyList />
+        )}
       </TaskList>
     </div>
   );

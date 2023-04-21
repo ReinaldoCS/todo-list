@@ -1,0 +1,15 @@
+.emptyListContainer {
+  display: grid;
+  place-items: center;
+
+  text-align: center;
+  color: var(--gray-300);
+  line-height: 140%;
+
+  margin: 5rem 1rem;
+
+}
+
+.emptyListContainer strong {
+  margin-top: 1rem;
+}
